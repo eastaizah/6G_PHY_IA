@@ -1,0 +1,14 @@
+{
+  "table2": {
+    "duration_s": 20.715880542000377
+  },
+  "rayleigh": {
+    "duration_s": 22.990410869000243
+  },
+  "ber_curves": {
+    "duration_s": 25.97139428299988
+  },
+  "shift": {
+    "duration_s": 37.14113432100021
+  }
+}

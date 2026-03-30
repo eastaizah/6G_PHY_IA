@@ -1,0 +1,38 @@
+[
+  {
+    "n": 7,
+    "k": 4,
+    "M": 16,
+    "train_time_s": 3.4322164400000474,
+    "gpu_hours": 0.0,
+    "num_params": 20247,
+    "device": "cpu"
+  },
+  {
+    "n": 16,
+    "k": 8,
+    "M": 256,
+    "train_time_s": 4.173348572000123,
+    "gpu_hours": 0.0,
+    "num_params": 52880,
+    "device": "cpu"
+  },
+  {
+    "n": 32,
+    "k": 8,
+    "M": 256,
+    "train_time_s": 4.299495495999963,
+    "gpu_hours": 0.0,
+    "num_params": 54944,
+    "device": "cpu"
+  },
+  {
+    "n": 64,
+    "k": 8,
+    "M": 256,
+    "train_time_s": 4.5018613469997035,
+    "gpu_hours": 0.0,
+    "num_params": 59072,
+    "device": "cpu"
+  }
+]

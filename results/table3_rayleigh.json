@@ -1,0 +1,14 @@
+{
+  "rayleigh_perfect_csi": {
+    "n7k4": NaN,
+    "n16k8": NaN,
+    "n32k8": NaN,
+    "n64k8": NaN
+  },
+  "rayleigh_no_csi": {
+    "n7k4": NaN,
+    "n16k8": NaN,
+    "n32k8": NaN,
+    "n64k8": NaN
+  }
+}
