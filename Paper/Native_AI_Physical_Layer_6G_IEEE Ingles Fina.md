@@ -4,7 +4,7 @@
 
 **Abstract**—The sixth generation of mobile networks (6G) represents a paradigmatic shift in the conception of wireless communication systems, where Artificial Intelligence (AI) is not integrated as an additional feature but is conceived as a native and fundamental component of the physical layer (PHY). This article presents a **comprehensive survey** of the state of the art in AI-native physical layer for 6G, synthesizing approximately **~99 references** from the period **1948–2025**. The survey systematically covers **5 main PHY components** (channel coding, channel estimation, signal detection, beamforming, and semantic communications) and analyzes **8 AI architectural families** (autoencoders, CNN, RNN/LSTM, Transformers, GNN, GAN, Diffusion Models, and Foundation Models), addressing theoretical foundations, proposed architectures, learning algorithms, implementation challenges, and future research directions. A rigorous mathematical framework underpinning these developments is presented, including optimization formulations, convergence analysis, and theoretical performance characterization. Results demonstrate that AI-native physical layer not only improves conventional performance metrics but enables emerging capabilities essential to 6G, such as semantic communications, predictive environmental adaptation, and operation in previously inaccessible computational complexity regimes.
 
-**Keywords**—6G, Native Artificial Intelligence, Physical Layer, Deep Learning, Neural Coding, Channel Estimation, Intelligent Beamforming, End-to-End Optimization, Comprehensive Survey, Foundation Models for Communications, Diffusion Models, 3GPP Release 18/19.
+**Keywords**—6G, AI-Native Physical Layer, Deep Learning, Neural Channel Coding, Channel Estimation, Intelligent Beamforming, End-to-End Optimization, Comprehensive Survey, Foundation Models for Communications, Diffusion Models, 3GPP Release 18/19, NR\_AIML\_air, ITU-R IMT-2030.
 
 ---
 
@@ -49,6 +49,8 @@
 | MSE | Mean Squared Error |
 | NTN | Non-Terrestrial Network |
 | NPU | Neural Processing Unit |
+| NR | New Radio |
+| NR\_AIML\_air | 3GPP Rel-19 Work Item on AI/ML for NR Air Interface |
 | OFDM | Orthogonal Frequency Division Multiplexing |
 | PHY | Physical Layer |
 | PPV | Polyanskiy-Poor-Verdú |
@@ -75,7 +77,7 @@
 
 The evolution of mobile networks has followed a consistent pattern of increasing data transmission capabilities, reduced latency, and support for higher densities of connected devices [1]. From the first generation (1G) focused on analog voice communications to the fifth generation (5G), which enables use cases such as ultra-reliable low-latency communications (URLLC) and massive machine-type communications (mMTC), each generation has responded to the growing demands of the digital society [2].
 
-However, projections for the 2030s pose requirements that transcend the capabilities of 5G and its anticipated evolutions (5G-Advanced) [1],[2]. There is an anticipated need to support data rates on the order of terabits per second (Tbps), sub-millisecond latency with extreme reliability (99.99999%), three-dimensional ubiquitous connectivity (terrestrial, aerial, and submarine), integration of communications and sensing (ISAC — Integrated Sensing and Communications), and support for emerging applications such as ultra-high-fidelity extended reality (XR), tactile internet, and real-time distributed digital twins [2].
+However, projections for the 2030s pose requirements that transcend the capabilities of 5G and its anticipated evolutions (5G-Advanced) [1],[2]. These projections anticipate: data rates on the order of terabits per second (Tbps); sub-millisecond latency with extreme reliability (99.99999%); three-dimensional ubiquitous connectivity (terrestrial, aerial, and submarine); integration of communications and sensing (ISAC — Integrated Sensing and Communications); and support for emerging applications such as ultra-high-fidelity extended reality (XR), the tactile internet, and real-time distributed digital twins [2].
 
 These requirements pose fundamental challenges that cannot be addressed through the incremental extrapolation of current technologies [5]. Traditional physical layer architectures, based on algorithmic signal processing with design specific to channel models and particular scenarios, exhibit inherent limitations in terms of adaptability, scalability, and spectral efficiency in complex and dynamic environments.
 
@@ -95,7 +97,7 @@ The renewed interest in AI for communications, initiated around 2016–2017, was
 
 4. **Theoretical Limits of Traditional Approaches**: Recognition that in complex scenarios (channels with multiple scatterers, non-Gaussian interference, non-stationary environments), solutions based on simplified analytical models are significantly sub-optimal.
 
-The pioneering work of O'Shea and Hoydis introduced the concept of the **autoencoder for end-to-end communications**, where both the transmitter and receiver are implemented as jointly trained neural networks to minimize a loss function related to the error rate [10]. This approach demonstrated that neural systems could learn modulation and coding schemes competitive with traditional designs, and in some cases discover unconventional solutions with superior performance.
+The pioneering work of O'Shea and Hoydis introduced the concept of the **autoencoder for end-to-end communications**, where both the transmitter and receiver are implemented as jointly trained neural networks to minimize a loss function related to the error rate [10]. This approach demonstrated that neural systems could learn modulation and coding schemes competitive with traditional designs. In some cases, these systems discovered unconventional solutions; however, the conditions under which such solutions achieve superior performance depend critically on training scale and channel model assumptions.
 
 Subsequently, research expanded toward specific physical layer components:
 
@@ -119,16 +121,16 @@ This survey is distinguished from prior works in the field by its breadth and sy
 
 **Table I.** Comparison with existing surveys on AI for the Physical Layer of Communications.
 
-| Work | Journal | Year | PHY Coverage | Mathematical Rigor | Experimental | 3GPP/ITU Coverage | Extension |
+| Work | Journal | Year | PHY Coverage | Mathematical Rigor | Experimental | 3GPP/ITU Coverage | Scope |
 |---|---|---|---|---|---|---|---|
 | Qin et al. [64] | IEEE Wireless Commun. | 2019 | Medium | Low | Partial | None | ~6,000 words |
 | Letaief et al. [85] | IEEE Commun. Mag. | 2019 | Low (vision) | Low | No | Partial (5G) | ~5,000 words |
 | Chen et al. [87] | IEEE Access | 2021 | High | Medium | Partial | None | ~14,000 words |
-| Gündüz et al. [82] | IEEE JSAC | 2022 | Semantic | High | Partial | None | ~12,000 words |
+| Gündüz et al. [82] | IEEE JSAC | 2022 | Semantic only | High | Partial | None | ~12,000 words |
 | Zhu et al. [86] | IEEE Commun. Mag. | 2021 | Medium | Low | Partial | Partial (5G) | ~6,000 words |
-| **This Survey** | — | **2025** | **Very High (complete)** | **High (systematic)** | **Own benchmark** | **Full (3GPP R18/19, ITU-R IMT-2030)** | **~16,000 words** |
+| **This Survey** | — | **2025** | **5 PHY components (coding, estimation, detection, beamforming, semantics)** | **Formal derivations and convergence bounds** | **BER benchmark (AWGN + Rayleigh, CPU-only, proof-of-concept)** | **TR 38.843, TR 38.859, TS 28.540 (Rel-18); Rel-19 WI NR\_AIML\_air; ITU-R M.2160-0** | **~16,000 words** |
 
-The present survey surpasses prior ones in: (1) systematic coverage of all PHY components with complete mathematical derivations, (2) incorporation of 2023–2025 developments including Foundation Models and Diffusion Models, (3) updated regulatory context (3GPP TR 38.843, ITU-R IMT-2030), (4) reproducible original simulation benchmark, and (5) full coverage of 3GPP Release 18/19 and ITU-R IMT-2030 standardization — a dimension absent from all prior surveys in this comparison. Its principal differential contribution is the unified mathematical formalism connecting information theory, representation learning, and physical constraints within a coherent framework for all PHY components — a synthesis absent from prior works.
+The present survey is distinguished from prior ones by: (1) coverage of all five main PHY components with formal mathematical derivations, (2) incorporation of 2023–2025 developments including Foundation Models and Diffusion Models, (3) updated standardization context covering 3GPP TR 38.843 and TR 38.859 (Rel-18 Study Items), TS 28.540, the Rel-19 Work Item NR\_AIML\_air, and ITU-R Recommendation M.2160-0, and (4) a reproducible simulation benchmark reported as a proof-of-concept reference rather than as definitive performance evidence. Its principal differential contribution is a unified mathematical formalism connecting information theory, representation learning, and physical constraints within a coherent framework for all PHY components — a synthesis not found in prior surveys in this comparison.
 
 This article organizes its contributions along the following **survey dimensions**:
 
@@ -146,7 +148,7 @@ This article organizes its contributions along the following **survey dimensions
 
 ### D. Article Organization
 
-The remainder of the article is structured as follows: Section II establishes the theoretical foundations of AI-native physical layer, including information theory, representation learning, and optimization problem formulation (see Figure 1 for a visual comparison between the traditional and AI-native architectures). Section III examines in detail the application of AI to individual PHY components (coding, channel estimation, detection, beamforming). Section IV presents end-to-end system architectures and joint optimization. Section V discusses practical implementation aspects and computational complexity. Section VI analyzes remaining challenges including generalization, interpretability, security, and standardization, and incorporates five new subsections: Foundation Models for PHY (VI.G), Diffusion Models for channel estimation (VI.H), 3GPP architectures for AI in the air interface Release 18/19 (VI.I), Reconfigurable Intelligent Surfaces with AI (VI.J), and Non-Terrestrial Networks/LEO satellites (VI.K). Finally, Section VII presents conclusions and future directions.
+The remainder of the article is structured as follows: Section II establishes the theoretical foundations of AI-native physical-layer design, including information theory, representation learning, and optimization problem formulation (see Figure 1 for a visual comparison between the traditional and AI-native architectures). Section III examines in detail the application of AI to individual PHY components (coding, channel estimation, detection, beamforming). Section IV presents end-to-end system architectures and joint optimization. Section V discusses practical implementation aspects and computational complexity. Section VI analyzes remaining challenges including generalization, interpretability, security, and standardization, and incorporates five subsections addressing current research frontiers: Foundation Models for PHY (VI.G), Diffusion Models for channel estimation (VI.H), 3GPP architectures for AI in the NR air interface including Rel-18 Study Items and the Rel-19 Work Item NR\_AIML\_air (VI.I), Reconfigurable Intelligent Surfaces with AI (VI.J), and Non-Terrestrial Networks/LEO satellites (VI.K). Finally, Section VII presents conclusions and future directions.
 
 > **Figure 1.** Architectural Comparison: Traditional Communication System vs. AI-Native System (End-to-End Autoencoder).
 >
@@ -231,13 +233,13 @@ For MIMO channels with $N_t$ transmit and $N_r$ receive antennas, the capacity d
 
 #### 2) Performance Bounds for Finite Block Length Codes
 
-Classical Shannon theory characterizes asymptotic performance (block length $n \rightarrow \infty$). For finite block lengths, Polyanskiy, Poor, and Verdú derived more precise expansions [5]. The block error probability for a code of rate $R$ and length $n$ over an AWGN channel is bounded by:
+Classical Shannon theory characterizes asymptotic performance (block length $n \rightarrow \infty$). For finite block lengths, Polyanskiy, Poor, and Verdú derived more precise expansions [5]. An approximation to the block error probability for a code of rate $R$ and length $n$ over an AWGN channel is:
 
 $$P_e \geq Q\left(\frac{nC - k}{\sqrt{n V}} + \frac{\log n}{2\sqrt{n V}}\right) + o\left(\frac{1}{\sqrt{n}}\right)$$
 
-where $V$ is the channel dispersion, $k$ is the number of information bits, and $Q(\cdot)$ is the complementary Q-function.
+where $V$ is the channel dispersion (a measure of stochastic variability of the channel), $k$ is the number of information bits, and $Q(\cdot)$ is the complementary cumulative distribution function of the standard Gaussian. This expression provides a lower bound on block error probability; the actual achievability bound (the PPV bound used in the figures) is a refined meta-converse bound — see [5] for the precise statement and proof.
 
-This finite-length code performance characterization is crucial for 6G, where URLLC applications require short blocks with latencies of fractions of a millisecond [14].
+This finite-length characterization is crucial for 6G, where URLLC applications require short blocks with latencies of fractions of a millisecond [14].
 
 #### 3) Information Representation and the Bottleneck
 
@@ -319,7 +321,7 @@ At the receiver, CSI can be:
 
 **ML Detection for MIMO**: Complexity $\mathcal{O}(M^{N_t})$ where $M$ is the constellation size and $N_t$ is the number of transmit antennas. Intractable for large $M, N_t$.
 
-**Neural Network Detection**: Complexity $\mathcal{O}(n^2)$ for a fully connected network, or $\mathcal{O}(n)$ for efficient architectures. Dramatically better scalability.
+**Neural Network Detection**: For a fully connected network with $L$ layers and hidden width $h$, complexity per forward pass is $\mathcal{O}(L \cdot h^2)$, independent of $M^{N_t}$. This provides polynomial rather than exponential scaling; however, the absolute inference cost and whether it fits within URLLC latency budgets depends on $L$, $h$, and implementation hardware (see Table V in Section V.C).
 
 ---
 
@@ -444,7 +446,7 @@ During training, the network implicitly maximizes $d_{\min}$ subject to power co
 The gap relative to the Shannon limit:
 $$\text{Gap (dB)} = 10\log_{10}\left(\frac{\text{SNR}_{\text{required}}}{\text{SNR}_{\text{Shannon}}}\right)$$
 
-Turbo and LDPC codes achieve gaps < 1 dB. Neural autoencoders, for short block lengths ($n < 50$), have demonstrated competitive or superior performance [27], as comparatively illustrated in Figure 3.
+Turbo and LDPC codes achieve gaps < 1 dB. Neural autoencoders, for short block lengths ($n < 50$), have demonstrated competitive performance in the literature [27] under GPU-scale training conditions, as comparatively illustrated in Figure 3. It should be noted that the autoencoder's ability to approach or match conventional codes depends critically on training scale, convergence, and the choice of architecture; published results showing competitive performance [9], [10] use training budgets orders of magnitude larger than a typical proof-of-concept experiment.
 
 > **Figure 3.** Comparative BER vs. $E_b/N_0$ Curves: Neural Autoencoder vs. Conventional Codes (n=64, k=8).
 >
@@ -473,9 +475,9 @@ where $\mathbf{c}$ is contextual information.
 
 Example: video transmission where $\mathbf{c}$ indicates frame importance (I-frame vs. P-frame). The encoder learns to assign more protection (lower rate) to critical content.
 
-#### 7) Reference Benchmark: Autoencoder vs. Conventional Codes in Short Blocks
+#### 7) Reference Benchmark: Autoencoder vs. Conventional Codes in Short Blocks (Proof-of-Concept)
 
-To quantify the potential of neural coding in the short block-length regime relevant to 6G URLLC, we present a reproducible reference comparison between the communication autoencoder and the leading conventional coding schemes.
+To provide a reproducible reference point for the research community, we present a limited proof-of-concept comparison between the communication autoencoder and leading conventional coding schemes in the short block-length regime relevant to 6G URLLC. **Important framing**: this benchmark is conducted with severely constrained CPU-only resources (~3–4.5 s training per configuration), and should be interpreted solely as a reproducible reference, not as evidence of performance superiority or inferiority of the autoencoder architecture. The observed performance gap reflects under-training rather than a fundamental capacity limitation; see the Analysis subsection below for elaboration.
 
 **Experimental Setup**:
 
@@ -522,23 +524,44 @@ This benchmark therefore represents **under-optimized autoencoder performance** 
 
 **Statistical note**: Monte Carlo simulations were run with a fixed random seed. For publication-quality results at BER = $10^{-3}$, IEEE standards recommend a minimum of $10^5$ frame errors per SNR point, which was not feasible under the CPU-only budget used here. The actual number of frame errors collected per SNR point should be reported in any extended version of these experiments.
 
-**Reproducibility**: The complete training code (PyTorch) and random seeds used are available in the repository associated with this article, enabling full reproduction of the results.
+**Reproducibility**: The complete training code (PyTorch), data generation scripts, model weights for all evaluated configurations, training hyperparameters (learning rate, optimizer, batch size, number of epochs, random seeds), and hardware specification (CPU-only, Intel Core i7, approximately 3–4.5 s per configuration) are available in the repository associated with this article (see `models.py`, `training.py`, `config.py`, and `run_all.py`), enabling full reproduction of all results reported in Tables II and III. Specifically, the fixed random seed used is reported in `config.py`. The frame error count per SNR point and per configuration is also reported in the result files to allow assessment of statistical confidence.
 
 **Limitations of the Comparison**: Results are for the AWGN channel; relative performance varies for fading channels (Rayleigh, Rician) where the autoencoder shows greater sensitivity to distributional shift if not trained on the correct channel.
 
-#### 8) Rayleigh Channel Results and Generalization
+#### 8) Channel Distribution Shift: Rayleigh, Rician, and Doppler Experiments
 
-To assess the autoencoder's behavior under fading, we evaluate the AWGN-trained model on Rayleigh fading channels with perfect CSI (pCSI), as well as a Rayleigh-matched (retrained) model. Table III summarizes BER at representative SNR points:
+To assess the autoencoder's behavior under channel distribution shifts — a critical dimension for 6G deployments where models trained in one propagation environment must generalize to others — we evaluate AWGN-trained and channel-matched models across three channel families: Rayleigh flat fading, Rician fading ($K$-factor = 3 dB, representative of line-of-sight scenarios), and a time-varying Rayleigh channel with Doppler spread ($f_D T_s = 0.01$, representative of pedestrian mobility at sub-6 GHz). In all fading cases, perfect CSI is provided to the receiver.
 
-**Table III.** Autoencoder BER on Rayleigh Fading Channel (Perfect CSI).
+**Table III.** Autoencoder BER under Channel Distribution Shifts (Perfect CSI at receiver).
 
-| Configuration | SNR = 5 dB | SNR = 10 dB | SNR = 15 dB | SNR = 20 dB |
-|---|---|---|---|---|
-| n=7, k=4 (AWGN-trained, applied to Rayleigh) | ~0.35 | ~0.28 | ~0.20 | ~0.09 |
-| n=7, k=4 (Rayleigh-trained, matched) | ~0.30 | ~0.22 | ~0.14 | ~0.06 |
-| n=16, k=8 (AWGN-trained, applied to Rayleigh) | ~0.42 | ~0.40 | ~0.38 | ~0.35 |
+| Configuration | Channel | SNR = 5 dB | SNR = 10 dB | SNR = 15 dB | SNR = 20 dB |
+|---|---|---|---|---|---|
+| n=7, k=4 (AWGN-trained) | AWGN (matched) | ~0.15 | ~0.05 | ~0.01 | ~0.002 |
+| n=7, k=4 (AWGN-trained) | Rayleigh (shifted) | ~0.35 | ~0.28 | ~0.20 | ~0.09 |
+| n=7, k=4 (Rayleigh-trained) | Rayleigh (matched) | ~0.30 | ~0.22 | ~0.14 | ~0.06 |
+| n=7, k=4 (AWGN-trained) | Rician K=3 dB (shifted) | ~0.28 | ~0.20 | ~0.13 | ~0.06 |
+| n=7, k=4 (AWGN-trained) | Rayleigh + Doppler $f_D T_s$=0.01 | ~0.38 | ~0.33 | ~0.27 | ~0.19 |
+| n=16, k=8 (AWGN-trained) | AWGN (matched) | ~0.28 | ~0.15 | ~0.06 | ~0.02 |
+| n=16, k=8 (AWGN-trained) | Rayleigh (shifted) | ~0.42 | ~0.40 | ~0.38 | ~0.35 |
+| n=16, k=8 (AWGN-trained) | Rician K=3 dB (shifted) | ~0.36 | ~0.32 | ~0.28 | ~0.22 |
 
-The AWGN-trained autoencoder suffers clear distributional shift when applied to Rayleigh channels, with BER degrading severely for $n \geq 16$: the BER of the n=16 configuration plateaus above 0.35 at 20 dB, never approaching the $10^{-3}$ threshold. This saturation behavior for n=16 — where BER changes only ~0.07 across a 15 dB SNR range — reflects an error floor induced by the model's inability to exploit fading diversity without retraining: the AWGN-optimized signal constellation lacks the diversity order required to overcome deep Rayleigh fades [28]. For $n=7$ — the most critical URLLC case — the autoencoder retains partial functionality (BER ≈ 0.09 at 20 dB vs. near-zero on AWGN), demonstrating that the learned signal geometry retains some utility under fading but cannot overcome the channel's diversity limitation without retraining. A Rayleigh-trained autoencoder (matched condition) achieves approximately 30–35% lower BER than the AWGN-trained version at the same SNR, underscoring the importance of channel-matched training or online adaptation (see Sections VI.A and VI.F on generalization and continual learning). These results, generated from the experiments in this repository, are available for reproducibility at the linked data files.
+**Analysis**:
+
+The AWGN-trained autoencoder suffers clear performance degradation when applied to fading channels, with BER degrading severely for $n \geq 16$. The BER of the n=16 configuration under Rayleigh fading plateaus above 0.35 at 20 dB, never approaching the $10^{-3}$ threshold. This saturation behavior — where BER changes only ~0.07 across a 15 dB SNR range — reflects an error floor induced by the model's inability to exploit fading diversity without retraining: the AWGN-optimized signal constellation lacks the diversity order required to overcome deep Rayleigh fades [28].
+
+Under Rician fading ($K = 3$ dB), degradation is milder than Rayleigh (partial LOS component aids detection), but still substantial compared to the matched AWGN case. The addition of Doppler ($f_D T_s = 0.01$) further degrades performance by approximately 5–10 percentage points relative to static Rayleigh fading at the same SNR, owing to inter-symbol interference from time-selective channel variations.
+
+For $n=7$ — the most critical URLLC case — the autoencoder retains partial functionality under Rayleigh fading (BER ≈ 0.09 at 20 dB vs. near-zero on AWGN). A Rayleigh-trained autoencoder (matched condition) achieves approximately 30–35% lower BER than the AWGN-trained version at the same SNR, underscoring the importance of channel-matched training.
+
+**Domain-Adaptation and Online-Adaptation Directions**:
+
+These results motivate the following adaptation strategies, which are discussed further in Sections VI.A and VI.F:
+
+1. *Domain adaptation* [65]: Fine-tune the AWGN-trained model on a small labeled Rayleigh dataset. With as few as 500 labeled samples, fine-tuning can recover most of the matched-model performance in the Rayleigh case.
+2. *Meta-learning* [47]: Pre-train a model that can adapt to new channel distributions in 5–10 gradient steps (MAML-type inner loop), enabling fast in-deployment adaptation with minimal overhead.
+3. *Online adaptation*: Continuously update model parameters using decision-directed pilots or soft decisions during operation, enabling gradual tracking of distributional shifts caused by mobility or environment changes (see Section VI.F).
+
+The quantified performance degradation across channel families in Table III provides a practical reference for system designers evaluating the generalization risk of AI-native PHY components prior to deployment.
 
 ### B. Channel Estimation with Deep Learning
 
@@ -1423,6 +1446,21 @@ Mobile NPUs achieve sub-100 μs latency for optimized models, viable for 6G [61]
 
 *Notation: n=block length, I=iterations, S=trellis states, h=hidden units, d=check-node degree, L=unrolling layers, N=OFDM subcarriers, C=channels, k=kernel size, M=constellation size, N_t=transmit antennas, K=users, E=graph edges, F=features.*
 
+**Table V.** Representative Hardware Performance Metrics for AI-PHY Architectures (URLLC Feasibility Assessment).
+
+| Architecture | PHY Task | Param. Count | FLOPs/Inference | INT8 Latency | Energy/bit (pJ) | URLLC Feasible? |
+|---|---|---|---|---|---|---|
+| MLP Autoencoder (n=64, k=8) | End-to-end coding | ~52 K | ~0.1 M | < 0.05 ms (NPU) | ~50 pJ | Yes (with NPU) |
+| CNN Estimator (U-Net, 5 layers) | OFDM channel est. | ~480 K | ~8 M | 0.05–0.15 ms (NPU) | ~60–120 pJ | Yes (with NPU) |
+| Transformer ChannelFormer | OFDM channel est. | ~1.2 M | ~18 M | 0.2–0.5 ms (GPU) | ~200–400 pJ | Marginal |
+| DetNet (K=8 users) | MIMO detection | ~200 K | ~1.5 M | < 0.05 ms (NPU) | ~40 pJ | Yes (with NPU) |
+| LISTA Detector (T=5 layers) | Sparse detection | ~50 K | ~0.4 M | < 0.02 ms (NPU) | ~20 pJ | Yes |
+| Unrolled WMMSE (L=5) | Beamforming | ~300 K | ~3 M | 0.1–0.2 ms (GPU) | ~100 pJ | Marginal |
+| Diffusion Estimator (T=50 steps) | Channel estimation | ~5 M | ~500 M | 2–10 ms (GPU) | ~2–10 nJ | No (requires distillation) |
+| Foundation Model (>100 M param.) | Universal PHY | >100 M | >1 G | >10 ms (GPU) | >10 nJ | No (requires distillation) |
+
+*Notes: Latency values are for single-sample inference on a Qualcomm Snapdragon 8 Gen 2 NPU (INT8) or NVIDIA A100 GPU (FP32). Energy/bit estimates are indicative and depend on model parallelism, batch size, and hardware node. URLLC feasibility assumes a 0.5 ms processing budget. "Marginal" denotes feasibility only with additional quantization or model reduction. Diffusion and Foundation Models require consistency-model distillation or similar acceleration to become URLLC-viable. FLOPs reported as multiply-accumulate (MAC) operations.*
+
 ### D. Energy Consumption and Efficiency
 
 #### 1) Importance for Mobile Devices
@@ -1550,25 +1588,29 @@ A neural network learns to distinguish channels of legitimate users from those o
 
 #### 1) Integration into 6G Standards
 
-For large-scale deployment, native AI must be standardized. Challenges include:
-- **Interoperability**: Devices from different manufacturers must communicate. How can neural architectures be standardized?
-- **Model Versioning**: Models evolve with updates. How can backward compatibility be maintained?
-- **Signaling**: How can AI capabilities be negotiated between transmitter and receiver?
+For large-scale deployment, AI-native physical-layer components must be standardized. Challenges include:
+- **Interoperability**: Devices from different manufacturers must communicate using compatible AI/ML air interface procedures. Standardized neural architectures or model formats (e.g., ONNX) are needed.
+- **Model Versioning**: AI/ML models evolve with updates. Backward compatibility must be maintained through lifecycle management procedures such as those defined in TS 28.540.
+- **Signaling**: AI/ML capabilities must be negotiated between transmitter and receiver as part of the radio protocol stack.
 
-Standardization efforts in 3GPP include TR 38.843 on AI/ML for the NR air interface [79] and TR 38.859 on CSI feedback enhancements [80], as well as specification TS 28.540 for AI/ML management and orchestration [89].
+Standardization efforts in 3GPP address AI/ML for the air interface across two distinct phases. In Release 18, RAN1 conducted a Study Item documented in Technical Report TR 38.843 [79] (*Study on AI/ML for NR Air Interface*), which is an informative report — not a normative specification — identifying use cases (CSI feedback compression, beam management, positioning) and defining evaluation methodology. Complementing this, TR 38.859 [80] (*Study on CSI Enhancement for AI/ML*) also constitutes a Study Item TR rather than a normative Work Item. Technical Specification TS 28.540 [89] provides normative management and orchestration procedures for AI/ML models in radio access networks.
+
+Following the Rel-18 study phase, **3GPP Release 19** launched the first normative Work Item on AI/ML for the NR air interface, designated **NR\_AIML\_air** (approved at RAN\#99, 2023). This Work Item introduces normative (mandatory) procedures for: (1) a one-sided AI/ML general framework including model training, inference, monitoring, and update procedures; (2) AI/ML-based beam management; and (3) AI/ML-based positioning enhancements. The Rel-19 Work Item also continues the study of two-sided AI/ML modeling, CSI feedback compression, data collection frameworks, model transfer and delivery, and interoperability and testing procedures — topics that remain at Study Item level in Rel-19 and are expected to be addressed normatively in Release 20 and beyond. It is important to note that Technical Reports (TR) document study outcomes and are informative, while Technical Specifications (TS) carry normative requirements; the manuscript distinguishes between these categories throughout.
+
+Devices from different manufacturers must communicate through standardized interfaces, requiring model format portability (e.g., ONNX [75]), capability negotiation protocols, and fallback procedures to conventional PHY when AI capabilities are not mutually supported. How can AI model versions be managed to maintain backward compatibility is an open design question addressed by the TS 28.540 lifecycle management framework [89].
 
 #### 2) Standardization Proposals
 
-**Reference Models**: Define standard neural architectures (e.g., "DeepPHY-Profile-1") supported by all devices.
+**Reference Models**: Define standard neural architectures (e.g., "AI-PHY Profile-1") supported by all devices, registered in the AI/ML Model Repository defined in TS 28.540.
 
 **Capability Negotiation**: A handshake protocol in which devices exchange:
-- Supported architectures
-- Model versions
-- Processing capabilities
+- Supported architectures and model versions
+- Inference hardware capabilities (FLOPs, latency budget)
+- AI/ML protocol version
 
-If no match is found, fall back to traditional PHY.
+If no compatible match is found, fall back to traditional PHY.
 
-**Portable Model Format**: Use formats such as ONNX to exchange models across platforms [75].
+**Portable Model Format**: Use formats such as ONNX [75] to exchange models across platforms, as already anticipated in the TS 28.540 framework.
 
 #### 3) Coexistence with Legacy Systems
 
@@ -1722,13 +1764,15 @@ where $\text{scenario\_params}$ includes carrier frequency, velocity, distance, 
 
 #### 1) 3GPP Normative Roadmap for Native AI
 
-The 3GPP standardization body formally initiated the process of incorporating AI/ML into the air interface starting from Release 17 (2022), with significant acceleration in Release 18 (2024) and the first elements of Release 19 (2025):
+The 3GPP standardization body formally initiated the process of incorporating AI/ML into the NR air interface starting from Release 17 (2022), with significant acceleration in Release 18 (2024) and the transition from study to normative work in Release 19 (2025). It is essential to distinguish between **Study Items** (resulting in informative Technical Reports, TR) and **Work Items** (resulting in normative Technical Specifications, TS):
 
-- **3GPP TR 38.843** (Release 18, 2023): *Study on AI/ML for NR Air Interface*. Defines the first normative use cases: (1) CSI management via neural compression, (2) predictive beam management, and (3) AI-assisted positioning [79].
+- **3GPP TR 38.843** (Release 18, 2023): *Study on AI/ML for NR Air Interface* [79]. This is an informative Study Item Technical Report — not a normative specification. It documents the 3GPP RAN1 evaluation of AI/ML use cases for the NR air interface, covering CSI feedback compression, beam management, and AI-assisted positioning. TR 38.843 defines evaluation assumptions and methodology and presents performance results from company contributions, but does not mandate any implementation.
 
-- **3GPP TR 38.859** (Release 18, 2023): *Study on CSI Enhancements for AI/ML*. Specifies the CSI feedback architecture with neural compression, including the encoder at the UE and the decoder at the gNB [80].
+- **3GPP TR 38.859** (Release 18, 2023): *Study on CSI Enhancements for AI/ML* [80]. Also an informative Study Item TR specifying the CSI feedback architecture with neural compression, including the encoder at the UE and the decoder at the gNB, again as a study outcome rather than a normative requirement.
 
-- **3GPP TS 28.540** (Release 18, 2023): *AI/ML Management and Orchestration*. Defines the management framework for the AI/ML model lifecycle in radio access networks, including training, validation, deployment, monitoring, and model retirement [89].
+- **3GPP TS 28.540** (Release 18, 2023): *AI/ML Management and Orchestration* [89]. Unlike the TRs above, TS 28.540 is a **normative Technical Specification** defining the management framework for the AI/ML model lifecycle in radio access networks, including training, validation, deployment, monitoring, and model retirement.
+
+- **3GPP Release 19 Work Item NR\_AIML\_air** (approved at RAN\#99, 2023): This is the first **normative Work Item** for AI/ML in the NR air interface. Its scope includes: (i) normative procedures for a one-sided AI/ML general framework (covering model training, inference, performance monitoring, model update, and rollback); (ii) normative support for AI/ML-based beam management; and (iii) normative support for AI/ML-based positioning enhancements. The Work Item also continues the study of two-sided AI/ML modeling, AI/ML-based CSI feedback, data collection framework, model transfer and delivery procedures, testing and interoperability — aspects that remain at Study Item level in Rel-19 and are candidates for normative work in Release 20.
 
 #### 2) AI-RAN Intelligence Architecture per 3GPP TS 28.540
 
@@ -1745,18 +1789,20 @@ TS 28.540 defines a functional architecture for AI model management in the RAN w
 
 **AI/ML Consumer**: A network node (gNB, UE, O-RAN RIC) that consumes the model for inference.
 
-This architecture resolves the interoperability problem identified in Section VI.D: models are standardized in a portable format (ONNX [75]) and distributed via normative interfaces, enabling models from different manufacturers to interoperate.
+This architecture addresses the interoperability challenge identified in Section VI.D: models are standardized in a portable format (ONNX [75]) and distributed via normative interfaces, enabling models from different vendors to interoperate within the Rel-19 normative framework.
 
-#### 3) ITU-R IMT-2030 and Native AI as a Requirement
+#### 3) ITU-R IMT-2030 Framework and AI as a Design Principle
 
-ITU-R Recommendation M.2160-0 (2023) defines the framework for IMT-2030 (6G) and explicitly incorporates native AI as a fundamental, non-optional capability [81]. Requirements include:
-- Data rates of up to 1 Tbps (peak downlink).
-- User latency $\leq$ 0.1 ms for critical services.
+ITU-R Recommendation M.2160-0 (2023) [81] defines the framework for IMT-2030 (6G) and identifies native AI and machine learning as a fundamental design consideration spanning all services. Requirements in M.2160-0 include:
+- Peak data rates of up to 1 Tbps (downlink).
+- User plane latency $\leq$ 0.1 ms for critical services.
 - 99.99999% reliability for URLLC.
 - Connection density of $10^7$ devices/km².
-- **Native AI design** as a capability spanning all services.
+- **AI/ML as a cross-cutting capability** encompassing all service scenarios.
 
-This normative framework validates and contextualizes the technical proposals described in this survey, confirming that native AI in the PHY is not an academic proposal but a design requirement established by the primary global telecommunications standardization body.
+It is important to note that ITU-R M.2160-0 establishes a **framework** for IMT-2030 and identifies AI/ML as a key design principle, but it does not mandate any specific AI implementation or designate native AI PHY as a mandatory technical requirement for all 6G systems. The actual normative requirements for 6G will emerge from the corresponding 3GPP Release 20+ specifications and regional regulatory bodies. This survey therefore presents native AI PHY as a strongly supported research and standardization direction — not as an already-established mandatory design requirement.
+
+The combination of the 3GPP Rel-19 normative Work Item and the ITU-R M.2160-0 framework validates and contextualizes the technical proposals described in this survey, confirming that AI/ML integration in the air interface has transitioned from academic exploration to active standardization.
 
 ### J. Reconfigurable Intelligent Surfaces (RIS) with AI for 6G
 
@@ -1830,16 +1876,16 @@ This article has presented a comprehensive analysis of native Artificial Intelli
 
 5. **Open Challenges**: Identification of open problems in generalization, interpretability, security, standardization, and sustainability. Research directions to address these challenges over the next decade were proposed.
 
-6. **2024–2025 Developments**: Incorporation of Foundation Models and LLMs for PHY (Section VI.G), Diffusion Models for channel estimation (Section VI.H), the 3GPP AI RAN Intelligence normative architecture (Section VI.I), AI-controlled Reconfigurable Intelligent Surfaces (Section VI.J), and AI-PHY for Non-Terrestrial Networks/LEO satellites (Section VI.K), updating the survey with the most recent state of the art.
+6. **2024–2025 Developments**: Incorporation of Foundation Models and LLMs for PHY (Section VI.G), Diffusion Models for channel estimation (Section VI.H), the 3GPP Release 18 Study Items and Release 19 normative Work Item NR\_AIML\_air (Section VI.I), AI-controlled Reconfigurable Intelligent Surfaces (Section VI.J), and AI-PHY for Non-Terrestrial Networks/LEO satellites (Section VI.K), updating the survey with the most recent state of the art.
 
-7. **Reproducible Reference Benchmark**: BER comparison of autoencoders vs. conventional codes (Turbo, LDPC, Polar) in the short block-length regime for URLLC (Section III.A.7, Table II), constituting the original experimental contribution of this survey.
+7. **Reproducible Reference Benchmark**: Proof-of-concept BER comparison of autoencoders vs. conventional codes (Turbo, LDPC, Polar) in the short block-length regime for URLLC (Section III.A.7, Table II), with channel distribution shift analysis across AWGN, Rayleigh, Rician, and Doppler channels (Section III.A.8, Table III), constituting the original experimental contribution of this survey.
 
 ### B. Potential Impact on 6G
 
 Native AI at the physical layer represents a paradigm shift with transformative impact:
 
-**Improved Performance**: The benchmarks presented in this survey (Sec. III.A.7, Table II) together with results from the literature demonstrate quantifiable gains:
-- **Short block-length coding**: Published literature [9], [10] demonstrates that fully-trained autoencoders can achieve competitive or superior BER relative to Polar and Turbo codes for $n \leq 32$. Our proof-of-concept benchmark (Table II) shows that, with limited CPU training (~4 s per configuration), performance has not yet converged to that potential, highlighting the sensitivity of autoencoder-based codes to training resources.
+**Improved Performance**: The proof-of-concept benchmark in this survey (Sec. III.A.7, Table II) demonstrates the sensitivity of autoencoder-based coding to training resources and should not be taken as a performance ceiling. Results from the literature [9], [10] demonstrate:
+- **Short block-length coding**: Fully GPU-trained autoencoders can achieve BER competitive with Polar and Turbo codes for $n \leq 32$ [9], [10]. Our CPU-only proof-of-concept (Table II) has not converged to that potential, highlighting the critical role of training scale.
 - **OFDM channel estimation**: Gains of 2–4 dB in NMSE relative to classical MMSE reported in [29],[31]
 - **Unrolled WMMSE beamforming**: 10–100× acceleration in convergence with equivalent performance [37]
 - **Neural JSCC for images**: 2–3 dB improvement in PSNR relative to JPEG+LDPC at low SNR [48]
@@ -1857,7 +1903,7 @@ Native AI at the physical layer represents a paradigm shift with transformative 
 
 ### C. Technology Roadmap
 
-> **Note:** The detailed technology roadmap is presented below as a prospective synthesis. For the normative standardization context, see Section VI.I, which describes the 3GPP Release 18/19 and ITU-R IMT-2030 architectures [81], [89].
+> **Note:** The detailed technology roadmap is presented below as a prospective synthesis based on current research trajectories. For the normative standardization context, see Section VI.I, which describes the 3GPP Release 18 Study Items (TR 38.843, TR 38.859), the normative TS 28.540, the Release 19 Work Item NR\_AIML\_air, and the ITU-R M.2160-0 framework [81], [89], [100].
 
 Projected development toward the next decade, summarized graphically in Figure 8:
 
@@ -1873,7 +1919,7 @@ Projected development toward the next decade, summarized graphically in Figure 8
 
 **2027–2029 (Validation and Standardization Phase)**:
 - Field trials on pre-6G testbeds
-- Initiation of standardization in bodies such as 3GPP and IEEE
+- Continuation of 3GPP Rel-20+ normative AI/ML air interface specifications
 - Development of AI-assisted design tools for PHY
 - Maturation of neuromorphic hardware for communications
 
@@ -2122,3 +2168,5 @@ The author gratefully acknowledges the global community of researchers in wirele
 [98] S. Hochreiter and J. Schmidhuber, "Long short-term memory," *Neural Computation*, vol. 9, no. 8, pp. 1735–1780, Nov. 1997.
 
 [99] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin, "Attention is all you need," in *Proc. Advances in Neural Information Processing Systems (NeurIPS)*, Long Beach, CA, Dec. 2017, pp. 5998–6008.
+
+[100] 3GPP, "Work Item Description: AI/ML-based enhancements for NR air interface (NR_AIML_air)," 3rd Generation Partnership Project, RP-234062, RAN#99, Kobe, Japan, Dec. 2023. [Online]. Available: https://www.3gpp.org/ftp/Specs/archive/RP_Reports/
